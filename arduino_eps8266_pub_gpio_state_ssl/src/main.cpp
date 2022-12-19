@@ -33,15 +33,15 @@ const int gpioInput3 = 14;
 
 // Параметры подключения к WiFi
 const char* wifiSSID = "k12iot";
-const char* wifiPASS = "b4RJqsuW";
+const char* wifiPASS = "xxxxxxxx";
 
 // Параметры подключения к MQTT брокеру 
 // Примечание: использовать статический mqttClientId оптимальнее с точки зрения фрагментации кучи, только не забывайте изменять его на разных устройствах
-const char* mqttServer   = "m5.wqtt.ru";
-const int   mqttPort     = 2633;
+const char* mqttServer   = "xx.wqtt.ru";
+const int   mqttPort     = 1234;
 const char* mqttClientId = "esp8266_inputs";
-const char* mqttUser     = "u_LWAF1J";
-const char* mqttPass     = "743WfNdM";
+const char* mqttUser     = "u_xxxx";
+const char* mqttPass     = "xXxXxXxX";
 
 // Корневой сертификат ISRG Root x1, действителен до 4 июня 2035 года
 static const char ISRG_Root_x1[] PROGMEM = R"EOF(
