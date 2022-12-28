@@ -103,6 +103,8 @@ bool wifiConnected()
     Serial.print(wifiSSID);
     
     // Настраиваем объект WiFi
+    WiFi.setAutoConnect = false;
+    WiFi.setAutoReconnect = false;
     WiFi.mode(WIFI_STA);
     WiFi.begin(wifiSSID, wifiPASS);
 
