@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <ESP8266httpUpdate.h>
 #include <PubSubClient.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
@@ -23,15 +24,15 @@ const char lvlRelayOn  = 0x1;
 const char lvlRelayOff = 0x0;
 
 // Параметры подключения к WiFi
-const char* wifiSSID  = "k12iot";
-const char* wifiPASS  = "*********";
+const char* wifiSSID  = "K12";
+const char* wifiPASS  = "K1234567";
 
 // Параметры подключения к MQTT брокеру 
 // Примечание: использовать статический mqttClientId оптимальнее с точки зрения фрагментации кучи, только не забывайте изменять его на разных устройствах
 const char* mqttServer   = "**.wqtt.ru";
 const int   mqttPort     = 1234;
 const int   mqttPortTLS  = 1235;
-const char* mqttClientId = "esp8266_dzen";
+const char* mqttClientId = "esp8266_ota";
 const char* mqttUser     = "u_******";
 const char* mqttPass     = "********";
 
@@ -81,6 +82,7 @@ const bool  mqttDeviceStatusRetained = true;
 
 // Топики для OTA обновлений
 const char* mqttTopicOTA             = "demo/ota";
+const int   mqttOTAQos               = 0;
 
 // Топики для внешнего управления реле
 const char* mqttTopicControlRelay1   = "demo/relay1/control";
@@ -296,9 +298,28 @@ void relayControl()
 }
 
 // ОТА обновление
-void otaStart(char* link)
+void otaStart(const char* linkOTA)
 {
+  Serial.print("OTA :: Receiving OTA: ");
+  Serial.print(linkOTA);
+  Serial.println("...");
 
+  WiFiClientSecure otaWiFi;
+  // Запускаем обновление
+  t_httpUpdate_return ret = ESPhttpUpdate.update(otaWiFi, linkOTA);
+  // Анализируем результат
+  switch(ret) {
+    case HTTP_UPDATE_FAILED:
+      Serial.println("OTA :: Update failed");
+      break;
+    case HTTP_UPDATE_NO_UPDATES:
+      Serial.println("OTA :: Update no Updates");
+      break;
+    case HTTP_UPDATE_OK:
+      // А вот это сообщение не факт, что вы увидите, потому что esp будет перезагружена
+      Serial.println("OTA :: Update OK");
+      break;
+  };
 }
 
 // Функция обратного вызова при поступлении входящего сообщения от брокера
@@ -369,6 +390,9 @@ bool mqttConnected()
 
       // Публикуем статус устройства в тот же топик, что и LWT, но с содержимым "online"
       mqttClient.publish(mqttTopicDeviceStatus, mqttDeviceStatusOn, mqttDeviceStatusRetained);
+
+      // Подписываемся на топик OTA
+      mqttClient.subscribe(mqttTopicOTA, mqttOTAQos);
 
       // Подписываемся на топики управления реле: поскольку топики заранее известны, никаких # и + здесь не нужно!
       mqttClient.subscribe(mqttTopicControlRelay1, mqttRelayControlQos);
