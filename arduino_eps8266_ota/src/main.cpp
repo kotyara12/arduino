@@ -79,6 +79,9 @@ const char* mqttDeviceStatusOff      = "offline";
 const int   mqttDeviceStatusQos      = 1;
 const bool  mqttDeviceStatusRetained = true; 
 
+// Топики для OTA обновлений
+const char* mqttTopicOTA             = "demo/ota";
+
 // Топики для внешнего управления реле
 const char* mqttTopicControlRelay1   = "demo/relay1/control";
 const char* mqttTopicControlRelay2   = "demo/relay2/control";
@@ -292,6 +295,12 @@ void relayControl()
   };
 }
 
+// ОТА обновление
+void otaStart(char* link)
+{
+
+}
+
 // Функция обратного вызова при поступлении входящего сообщения от брокера
 void mqttOnIncomingMsg(char* topic, byte* payload, unsigned int length)
 {
@@ -312,7 +321,10 @@ void mqttOnIncomingMsg(char* topic, byte* payload, unsigned int length)
 
   // Сравниваем с топиками
   String _topic(topic);
-  if (_topic.equals(mqttTopicControlRelay1)) {
+  if (_topic.equals(mqttTopicOTA)) {
+    // это топик со ссылкой на OTA обновление
+    otaStart(_payload.c_str());
+  } else if (_topic.equals(mqttTopicControlRelay1)) {
     // это топик управления реле 1
     if (_payload.equals(mqttRelayStatusOn1) || _payload.equals(mqttRelayStatusOn2)) {
       relayCommand1 = lvlRelayOn;
