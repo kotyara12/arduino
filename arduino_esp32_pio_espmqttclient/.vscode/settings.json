@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "array": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "vector": "cpp",
+    "string_view": "cpp",
+    "memory": "cpp",
+    "random": "cpp",
+    "initializer_list": "cpp"
+  },
+  "idf.pythonInstallPath": "C:\\Projects\\Espressif\\.esp-idf\\tools\\idf-python\\3.11.2\\python.exe"
+}
