@@ -1,6 +1,10 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266httpUpdate.h>
+<<<<<<< HEAD
+=======
+#include <ESP8266HTTPClient.h>
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
 #include <PubSubClient.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
@@ -29,6 +33,7 @@ const char* wifiPASS  = "K1234567";
 
 // Параметры подключения к MQTT брокеру 
 // Примечание: использовать статический mqttClientId оптимальнее с точки зрения фрагментации кучи, только не забывайте изменять его на разных устройствах
+<<<<<<< HEAD
 const char* mqttServer   = "**.wqtt.ru";
 const int   mqttPort     = 1234;
 const int   mqttPortTLS  = 1235;
@@ -38,6 +43,21 @@ const char* mqttPass     = "********";
 
 // Корневой сертификат ISRG Root x1, действителен до 4 июня 2035 года
 static const char ISRG_Root_x1[] PROGMEM = R"EOF(
+=======
+const char* mqttServer   = "z9.wqtt.ru";
+const int   mqttPort     = 9998;
+const int   mqttPortTLS  = 9999;
+const char* mqttClientId = "esp8266_telegram";
+const char* mqttUser     = "u_test";
+const char* mqttPass     = "EaxtnZGg";
+
+// Параметры Telegram бота для отправки сообщений
+const char* tgToken      = "9341065673:AAFMkznAhvFsYGKdtILaNUqg93yh_qAQoHk";
+const char* tgChatId     = "-4085399558";
+
+// Корневой сертификат ISRG Root x1, действителен до 4 июня 2035 года
+static const char ISRG_Root_x1[] PROGMEM = R"CERT(
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
 -----BEGIN CERTIFICATE-----
 MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw
 TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh
@@ -69,7 +89,39 @@ oyi3B43njTOQ5yOf+1CceWxG1bQVs5ZufpsMljq4Ui0/1lvh+wjChP4kqKOJ2qxq
 mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d
 emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
 -----END CERTIFICATE-----
+<<<<<<< HEAD
 )EOF";
+=======
+)CERT";
+
+// Корневой сертификат для Telegram API, действителен до 29 июня 2034
+static const char TG_API_Root[] PROGMEM = R"CERT(
+-----BEGIN CERTIFICATE-----
+MIIEADCCAuigAwIBAgIBADANBgkqhkiG9w0BAQUFADBjMQswCQYDVQQGEwJVUzEh
+MB8GA1UEChMYVGhlIEdvIERhZGR5IEdyb3VwLCBJbmMuMTEwLwYDVQQLEyhHbyBE
+YWRkeSBDbGFzcyAyIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTA0MDYyOTE3
+MDYyMFoXDTM0MDYyOTE3MDYyMFowYzELMAkGA1UEBhMCVVMxITAfBgNVBAoTGFRo
+ZSBHbyBEYWRkeSBHcm91cCwgSW5jLjExMC8GA1UECxMoR28gRGFkZHkgQ2xhc3Mg
+MiBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eTCCASAwDQYJKoZIhvcNAQEBBQADggEN
+ADCCAQgCggEBAN6d1+pXGEmhW+vXX0iG6r7d/+TvZxz0ZWizV3GgXne77ZtJ6XCA
+PVYYYwhv2vLM0D9/AlQiVBDYsoHUwHU9S3/Hd8M+eKsaA7Ugay9qK7HFiH7Eux6w
+wdhFJ2+qN1j3hybX2C32qRe3H3I2TqYXP2WYktsqbl2i/ojgC95/5Y0V4evLOtXi
+EqITLdiOr18SPaAIBQi2XKVlOARFmR6jYGB0xUGlcmIbYsUfb18aQr4CUWWoriMY
+avx4A6lNf4DD+qta/KFApMoZFv6yyO9ecw3ud72a9nmYvLEHZ6IVDd2gWMZEewo+
+YihfukEHU1jPEX44dMX4/7VpkI+EdOqXG68CAQOjgcAwgb0wHQYDVR0OBBYEFNLE
+sNKR1EwRcbNhyz2h/t2oatTjMIGNBgNVHSMEgYUwgYKAFNLEsNKR1EwRcbNhyz2h
+/t2oatTjoWekZTBjMQswCQYDVQQGEwJVUzEhMB8GA1UEChMYVGhlIEdvIERhZGR5
+IEdyb3VwLCBJbmMuMTEwLwYDVQQLEyhHbyBEYWRkeSBDbGFzcyAyIENlcnRpZmlj
+YXRpb24gQXV0aG9yaXR5ggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQAD
+ggEBADJL87LKPpH8EsahB4yOd6AzBhRckB4Y9wimPQoZ+YeAEW5p5JYXMP80kWNy
+OO7MHAGjHZQopDH2esRU1/blMVgDoszOYtuURXO1v0XJJLXVggKtI3lpjbi2Tc7P
+TMozI+gciKqdi0FuFskg5YmezTvacPd+mSYgFFQlq25zheabIZ0KbIIOqPjCDPoQ
+HmyW74cNxA9hi63ugyuV+I6ShHI56yDqg+2DzZduCLzrTia2cyvk0/ZM/iZx4mER
+dEr/VxqHD3VILs9RaRegAhJhldXRQLIQTO7ErBBDpqWeCtWVYpoNz4iCxTIM5Cuf
+ReYNnyicsbkqWletNw+vHX/bvZ8=
+-----END CERTIFICATE-----
+)CERT";
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
 
 // Топик LWT, одновременно это топик статуса устройства:
 // - в рабочем состоянии в этом топике будет сообщение "online"
@@ -118,10 +170,18 @@ const bool  mqttSensorsRetained      = false;
  * Глобальные переменные
  *************************************************************************/
 
+<<<<<<< HEAD
 // Корневой сертификат
 BearSSL::X509List certISRG(ISRG_Root_x1);
 BearSSL::WiFiClientSecure wifiClient;
 PubSubClient mqttClient(wifiClient);
+=======
+// Подключение к MQTT брокеру (серверу)
+// !!! Поскольку у ESP8266 памяти очень мало (~40 kB), нам придется пожертвовать "постоянным" TLS-подключением к MQTT
+// BearSSL::X509List certISRG(ISRG_Root_x1);
+WiFiClient wifiMqtt; // BearSSL::WiFiClientSecure wifiClient;
+PubSubClient mqttClient(wifiMqtt);
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
 
 // Текущее состояние реле
 char relayStatus1 = lvlRelayOff;
@@ -213,7 +273,11 @@ bool wifiConnected()
     Serial.print(asctime(&timeinfo));
 
     // Теперь можно привязать корневой сертификат к клиенту WiFi
+<<<<<<< HEAD
     wifiClient.setTrustAnchors(&certISRG);
+=======
+    // wifiClient.setTrustAnchors(&certISRG);
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
   };
   return true;
 }
@@ -304,9 +368,19 @@ void otaStart(const char* linkOTA)
   Serial.print(linkOTA);
   Serial.println("...");
 
+<<<<<<< HEAD
   WiFiClientSecure otaWiFi;
   // Запускаем обновление
   t_httpUpdate_return ret = ESPhttpUpdate.update(otaWiFi, linkOTA);
+=======
+  // Настраиваем безопасное подключение к серверу
+  BearSSL::WiFiClientSecure wifiOTA;
+  BearSSL::X509List certISRG(ISRG_Root_x1);
+  wifiOTA.setTrustAnchors(&certISRG);
+
+  // Запускаем обновление
+  t_httpUpdate_return ret = ESPhttpUpdate.update(wifiOTA, linkOTA);
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
   // Анализируем результат
   switch(ret) {
     case HTTP_UPDATE_FAILED:
@@ -374,10 +448,175 @@ void mqttOnIncomingMsg(char* topic, byte* payload, unsigned int length)
   };
 }
 
+<<<<<<< HEAD
 // Отправка сообщения в Telegram
 bool telegramSendMessage(const char* chatId, char* message)
 {
   return false;
+=======
+/*****************************************************************************************
+ * Отправка сообщения в Telegram
+ * -----------------------------
+ * Разными способами - вы можете использовать любой по вкусу и необходимости
+ ****************************************************************************************/
+
+// Вариант 1: GET-запросом, без перекодирования служебных символов - вы должны подготовить исходную строку соответствующим образом
+// С использованием локальных экземпляров объектов в стеке, с отправкой заголовков отдельными командами wifiTg.print
+void telegramSendMessage_Get_Raw(const char* chatId, char* message)
+{
+  Serial.print("TG :: Send message: ");
+  Serial.print(message);
+  Serial.println("...");
+
+  // Настраиваем безопасное подключение к API
+  WiFiClientSecure wifiTg;
+  // wifiTg.setInsecure();
+  X509List certTg(TG_API_Root);
+  wifiTg.setTrustAnchors(&certTg);
+
+  // Пробуем подключиться к Telegram API: обратите внимание - API принимает входящие запросы только по HTTPS на 443 порту
+  if (wifiTg.connect("api.telegram.org", 443)) {
+    // Формируем и отправляем GET-запрос для отправки сообщения
+    wifiTg.printf("GET https://api.telegram.org/bot%s/sendMessage?chat_id=%s&parse_mode=HTML&text=%s HTTP/1.1\r\n", tgToken, chatId, message);
+    // Отправляем служебные HTTP-заголовки
+    wifiTg.println(F("Host: api.telegram.org"));
+    wifiTg.println(F("User-Agent: ESP8266"));
+    // Отправляем пустую строку, которая указывает серверу, что запрос полностью отправлен
+    wifiTg.println();
+    
+    // Читаем ответ сервера (только первую строку)
+    Serial.print(F("TG :: API responce: "));
+    Serial.println(wifiTg.readStringUntil('\n'));
+    // Закрываем соединение
+    wifiTg.stop();
+  } else {
+    Serial.printf("#ERROR# :: Failed to connect to Telegram API: %d\r\n", wifiTg.getLastSSLError());
+  };
+}
+
+// Вариант 2: GET-запросом, с перекодированием служебных символов - пишите как Вам удобно
+// C использованием локальных экземпляров объектов в heap (куче) и формированием запроса "целиком" по шаблону
+
+static const char* tgGetRequest = "GET https://api.telegram.org/bot%s/sendMessage?chat_id=%s&parse_mode=HTML&text=%s HTTP/1.1\r\n"
+                                  "Host: api.telegram.org\r\n"
+                                  "User-Agent: ESP8266\r\n\r\n";
+
+void telegramSendMessage_Get_Encoded(const char* chatId, char* message)
+{
+  Serial.print("TG :: Send message: ");
+  Serial.print(message);
+  Serial.println("...");
+
+  // Percent-encoding символов в URI на HTML-коды %XX
+  String msg = String(message);
+  msg.replace("\n", "%0A");
+  msg.replace("\r", "%0D");
+  
+  // Настраиваем безопасное подключение к API с размещением временных объектов в куче (heap)
+  WiFiClientSecure *wifiTg = new WiFiClientSecure;
+  // wifiTg->setInsecure();
+  X509List *certTg = new X509List(TG_API_Root);
+  wifiTg->setTrustAnchors(certTg);
+
+  // Пробуем подключиться к Telegram API: обратите внимание - API принимает входящие запросы только по HTTPS на 443 порту
+  if (wifiTg->connect("api.telegram.org", 443)) {
+    // Формируем и отправляем GET-запрос для отправки сообщения (сразу целиком, по шаблону)
+    wifiTg->printf(tgGetRequest, tgToken, chatId, msg.c_str());
+    
+    // Читаем ответ сервера (только первую строку)
+    Serial.print(F("TG :: API responce code: "));
+    Serial.println(wifiTg->readStringUntil('\n'));
+    // Закрываем соединение
+    wifiTg->stop();
+  } else {
+    Serial.printf("#ERROR# :: Failed to connect to Telegram API: %d\r\n", wifiTg->getLastSSLError());
+  };
+
+  // Не забываем удалить данные, размещенные в куче
+  delete wifiTg;
+  delete certTg;
+}
+
+// Вариант 3: POST-запросом через WiFiClient
+// C использованием локальных экземпляров объектов в куче и формированием запроса "целиком" по шаблону
+
+static const char* tgPostRequest = "POST https://api.telegram.org/bot%s/sendMessage HTTP/1.1\r\n"
+                                   "Host: api.telegram.org\r\n"
+                                   "User-Agent: ESP8266\r\n"
+                                   "Content-Type: application/json\r\n"
+                                   "Content-Length: %d\r\n\r\n"
+                                   "%s\r\n\r\n";
+
+void telegramSendMessage_Post(const char* chatId, char* message)
+{
+  Serial.print("TG :: Send message: ");
+  Serial.print(message);
+  Serial.println("...");
+
+  // Формируем JSON-пакет с данными
+  String sJSON = "{\"chat_id\":" + String(chatId) + ",\"parse_mode\":\"HTML\",\"disable_notification\":false,\"text\":\"" + String(message) + "\"}";
+  Serial.println(sJSON.c_str());
+
+  // Настраиваем безопасное подключение к API с размещением временных объектов в куче (heap)
+  WiFiClientSecure *wifiTg = new WiFiClientSecure;
+  // wifiTg->setInsecure();
+  X509List *certTg = new X509List(TG_API_Root);
+  wifiTg->setTrustAnchors(certTg);
+
+  // Пробуем подключиться к Telegram API: обратите внимание - API принимает входящие запросы только по HTTPS на 443 порту
+  if (wifiTg->connect("api.telegram.org", 443)) {
+    // Формируем и отправляем POST-запрос для отправки сообщения (сразу целиком, по шаблону)
+    wifiTg->printf(tgPostRequest, tgToken, sJSON.length(), sJSON.c_str());
+    
+    // Читаем ответ сервера (только первую строку)
+    Serial.print(F("TG :: API responce code: "));
+    Serial.println(wifiTg->readStringUntil('\n'));
+    // Закрываем соединение
+    wifiTg->stop();
+  } else {
+    Serial.printf("#ERROR# :: Failed to connect to Telegram API: %d\r\n", wifiTg->getLastSSLError());
+  };
+
+  // Не забываем удалить данные, размещенные в куче
+  delete wifiTg;
+  delete certTg;
+}
+
+// Вариант 4: POST-запросом через HttpClient
+// C использованием локальных экземпляров объектов в стеке, формированием запроса занимается HTTPClient
+void telegramSendMessage_Post_Http(const char* chatId, char* message)
+{
+  Serial.print("TG :: Send message: ");
+  Serial.print(message);
+  Serial.println("...");
+
+  // Формируем JSON-пакет с данными
+  String sJSON = "{\"chat_id\":" + String(chatId) + ",\"parse_mode\":\"HTML\",\"disable_notification\":false,\"text\":\"" + String(message) + "\"}";
+  Serial.println(sJSON.c_str());
+
+  // Настраиваем безопасное подключение к API
+  WiFiClientSecure wifiTg;
+  HTTPClient tgHttp;
+  // wifiTg.setInsecure();
+  X509List certTg(TG_API_Root);
+  wifiTg.setTrustAnchors(&certTg);
+
+  // Формируем динамическую URI
+  String sURI = "https://api.telegram.org/bot" + String(tgToken) + "/sendMessage";
+  // Пробуем подключиться к Telegram API
+  if (tgHttp.begin(wifiTg, sURI.c_str())) {
+    // Добавляем заголовок с типом данных
+    tgHttp.addHeader("Content-Type", "application/json");
+    // Формируем и отправляем POST-запрос для отправки сообщения
+    int httpCode = tgHttp.POST(sJSON);
+    // Выводим в лог код ответа сервера (только первую строку)
+    Serial.printf("TG :: API responce code: %d\r\n", httpCode);
+    // Закрываем соединение
+    tgHttp.end();
+  } else {
+    Serial.printf("#ERROR# :: Failed to connect to Telegram API: %d\r\n", wifiTg.getLastSSLError());
+  };
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
 }
 
 // Подключение к MQTT брокеру :: версия для PubSubClient от knolleary ("стандартная")
@@ -385,8 +624,14 @@ bool mqttConnected()
 {
   if (!mqttClient.connected()) {
     Serial.print("Connecting to MQTT broker: ");
+<<<<<<< HEAD
     // Настраиваем MQTT клиент
     mqttClient.setServer(mqttServer, mqttPortTLS);
+=======
+
+    // Настраиваем MQTT клиент
+    mqttClient.setServer(mqttServer, mqttPort);
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
     mqttClient.setCallback(mqttOnIncomingMsg);
 
     // Пробуем подключиться с LWT сообщением "offline"
@@ -409,6 +654,17 @@ bool mqttConnected()
       mqttClient.publish(mqttTopicStatusRelay1, (relayStatus1 == 1 ? mqttRelayStatusOnD : mqttRelayStatusOffD), mqttRelayStatusRetained);
       mqttClient.publish(mqttTopicStatusRelay2, (relayStatus2 == 1 ? mqttRelayStatusOnD : mqttRelayStatusOffD), mqttRelayStatusRetained);
       mqttClient.publish(mqttTopicStatusRelay3, (relayStatus3 == 1 ? mqttRelayStatusOnD : mqttRelayStatusOffD), mqttRelayStatusRetained);
+<<<<<<< HEAD
+=======
+
+      // Отправляем уведомление в Telegram о том, что подключение успешно выполнено
+      // Пробуем все вариантыЖ в реальном приложении используйте только один способ
+      telegramSendMessage_Get_Raw(tgChatId, (char*)"Версия telegramSendMessage_Get_Raw (не правильно)\n<b>Жирный шрифт</b>\n<i>Наклонный шрифт</i>\n<u>Подчеркнутый шрифт</u>");
+      telegramSendMessage_Get_Raw(tgChatId, (char*)"Версия telegramSendMessage_Get_Raw (правильно)%0A<b>Жирный шрифт</b>%0A<i>Наклонный шрифт</i>%0A<u>Подчеркнутый шрифт</u>");
+      telegramSendMessage_Get_Encoded(tgChatId, (char*)"Версия telegramSendMessage_Get_Encoded\n<b>Жирный шрифт</b>\n<i>Наклонный шрифт</i>\n<u>Подчеркнутый шрифт</u>");
+      telegramSendMessage_Post(tgChatId, (char*)"Версия telegramSendMessage_Post\n<b>Жирный шрифт</b>\n<i>Наклонный шрифт</i>\n<u>Подчеркнутый шрифт</u>");
+      telegramSendMessage_Post_Http(tgChatId, (char*)"Версия telegramSendMessage_Post_Http\n<b>Жирный шрифт</b>\n<i>Наклонный шрифт</i>\n<u>Подчеркнутый шрифт</u>");
+>>>>>>> 647be8bd4ab17f363c98bf25f62edd64794181e8
     } else {
       Serial.print("failed, error code: ");
       Serial.print(mqttClient.state());
